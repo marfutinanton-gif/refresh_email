@@ -1,186 +1,706 @@
 <!DOCTYPE html>
-<html lang="ru" xmlns="http://www.w3.org/1999/xhtml" xmlns:v="urn:schemas-microsoft-com:vml" xmlns:o="urn:schemas-microsoft-com:office:office">
+<html lang="ru">
 <head>
   <meta charset="UTF-8">
+  <title>Обновите рабочий монитор</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="x-apple-disable-message-reformatting">
-  <title>Пора поменять ваш монитор</title>
-  <!--[if mso]>
-  <noscript><xml><o:OfficeDocumentSettings><o:PixelsPerInch>96</o:PixelsPerInch></o:OfficeDocumentSettings></xml></noscript>
-  <![endif]-->
+
   <style>
-    /* Прогрессивное улучшение для современных клиентов (Outlook на Word-движке это игнорирует — базовая вёрстка ниже самодостаточна) */
-    body { margin: 0 !important; padding: 0 !important; width: 100% !important; }
-    table { border-collapse: collapse; }
-    img { border: 0; line-height: 100%; outline: none; text-decoration: none; }
-    a { text-decoration: none; }
-    .screen-cell { background-image: linear-gradient(135deg, #0c3b2e 0%, #15604f 100%); }
-    @media only screen and (max-width: 620px) {
-      .container { width: 100% !important; }
-      .px { padding-left: 22px !important; padding-right: 22px !important; }
-      .h1 { font-size: 30px !important; line-height: 34px !important; }
-      .lead { font-size: 17px !important; line-height: 24px !important; }
-      .monitor { width: 240px !important; }
+    :root {
+      /*
+        Dynamic Indent:
+        Size = text style line-height; Space = Open / Inner / Micro / Nano / Zero.
+        BaseX is the step used to reduce Space from Size.
+      */
+      --base-x: 4px;
+      --base-2x: calc(var(--base-x) + var(--base-x));
+      --base-3x: calc(var(--base-2x) + var(--base-x));
+
+      --di-h1-size: 60px;
+      --di-h1-open: var(--di-h1-size);
+      --di-h1-inner: calc(var(--di-h1-size) - var(--base-x));
+      --di-h1-micro: calc(var(--di-h1-size) - var(--base-2x));
+      --di-h1-nano: calc(var(--di-h1-size) - var(--base-3x));
+
+      --di-body-1-size: 24px;
+      --di-body-1-open: var(--di-body-1-size);
+      --di-body-1-inner: calc(var(--di-body-1-size) - var(--base-x));
+      --di-body-1-micro: calc(var(--di-body-1-size) - var(--base-2x));
+      --di-body-1-nano: calc(var(--di-body-1-size) - var(--base-3x));
+
+      --di-body-2-size: 20px;
+      --di-body-2-open: var(--di-body-2-size);
+      --di-body-2-inner: calc(var(--di-body-2-size) - var(--base-x));
+      --di-body-2-micro: calc(var(--di-body-2-size) - var(--base-2x));
+      --di-body-2-nano: calc(var(--di-body-2-size) - var(--base-3x));
+
+      --di-sm-size: 16px;
+      --di-sm-open: var(--di-sm-size);
+      --di-sm-inner: calc(var(--di-sm-size) - var(--base-x));
+      --di-sm-micro: calc(var(--di-sm-size) - var(--base-2x));
+      --di-sm-nano: calc(var(--di-sm-size) - var(--base-3x));
+
+      --di-zero: 0;
     }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      padding: 24px;
+      padding: var(--di-body-1-open);
+      background-color: #eef2f5;
+      font-family: "SB Sans", "SB Sans Text", "SB Sans Display", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+      color: #111111;
+    }
+
+    .page {
+      max-width: 640px;
+      margin: 0 auto;
+      background:
+        radial-gradient(circle at 78% 18%, rgba(174, 255, 93, 0.45) 0, rgba(174, 255, 93, 0) 24%),
+        radial-gradient(circle at 20% 85%, rgba(130, 220, 215, 0.55) 0, rgba(130, 220, 215, 0) 32%),
+        linear-gradient(135deg, #d8f5f7 0%, #f6fbf4 50%, #d9efd4 100%);
+      min-height: 840px;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 12px 32px rgba(0, 0, 0, 0.12);
+    }
+
+    .content {
+      position: relative;
+      z-index: 5;
+      padding: 48px 48px 220px;
+      padding: var(--di-h1-nano) var(--di-h1-nano) 220px;
+    }
+
+    .logo-badge {
+      position: absolute;
+      left: 48px;
+      bottom: 72px;
+      z-index: 6;
+      width: calc((100% - 112px) / 2);
+      height: 104px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(255, 255, 255, 0.78);
+      border-radius: 18px;
+      padding: 12px 16px;
+      padding: var(--di-sm-inner) var(--di-sm-open);
+      margin-bottom: 0;
+      box-shadow: 0 8px 22px rgba(25, 96, 57, 0.08);
+      backdrop-filter: blur(4px);
+    }
+
+    .logo-badge svg {
+      display: block;
+      width: 220px;
+      max-width: 100%;
+      height: auto;
+    }
+
+    .title {
+      position: relative;
+      z-index: 5;
+      font-size: 62px;
+      line-height: 60px;
+      line-height: var(--di-h1-size);
+      letter-spacing: -2.3px;
+      font-weight: 850;
+      color: #050505;
+      margin-bottom: 12px;
+      margin-bottom: var(--di-sm-inner);
+      max-width: 540px;
+      overflow-wrap: anywhere;
+    }
+
+    .lead {
+      position: relative;
+      z-index: 5;
+      font-size: 21px;
+      line-height: 24px;
+      line-height: var(--di-body-1-size);
+      letter-spacing: -0.35px;
+      font-weight: 500;
+      max-width: 535px;
+      color: #111111;
+      margin-bottom: 0;
+      margin-bottom: var(--di-zero);
+      text-align: justify;
+      text-align-last: left;
+      text-justify: inter-word;
+      hyphens: auto;
+      overflow-wrap: break-word;
+    }
+
+    .notice {
+      position: relative;
+      z-index: 5;
+      width: 100%;
+      max-width: 544px;
+      margin-top: 24px;
+      margin-top: var(--di-body-1-open);
+      background: rgba(255, 255, 255, 0.62);
+      border-radius: 18px;
+      padding: 16px 20px;
+      padding: var(--di-body-2-inner) var(--di-body-2-open);
+      font-size: 14px;
+      line-height: 20px;
+      line-height: var(--di-body-2-size);
+      color: #243b35;
+      backdrop-filter: blur(4px);
+      text-align: justify;
+      text-align-last: left;
+      text-justify: inter-word;
+      hyphens: auto;
+      overflow-wrap: break-word;
+    }
+
+    .notice strong {
+      color: #0a6f35;
+    }
+
+    .email-pill {
+      display: inline-block;
+      margin-top: 8px;
+      margin-top: var(--di-sm-micro);
+      padding: 4px 12px;
+      padding: var(--di-sm-nano) var(--di-sm-inner);
+      border-radius: 999px;
+      background: #eaf4ed;
+      color: #0a6f35;
+      font-family: "SB Sans", "SB Sans Text", "SB Sans Display", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    .community-link {
+      display: inline-block;
+      margin-top: 12px;
+      margin-top: var(--di-sm-inner);
+      padding: 8px 16px;
+      padding: var(--di-sm-micro) var(--di-sm-open);
+      border-radius: 999px;
+      background: linear-gradient(135deg, #21b653, #7ee33d);
+      color: #ffffff;
+      text-decoration: none;
+      font-size: 14px;
+      line-height: 16px;
+      line-height: var(--di-sm-size);
+      font-weight: 800;
+      box-shadow: 0 6px 14px rgba(20, 130, 54, 0.18);
+    }
+
+    .community-link:hover {
+      text-decoration: none;
+      filter: brightness(0.98);
+    }
+
+    .community-qr-wrap {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      gap: var(--di-sm-open);
+      margin-top: 12px;
+      margin-top: var(--di-sm-inner);
+    }
+
+    .community-qr {
+      width: 82px;
+      height: 82px;
+      padding: 4px;
+      padding: var(--di-sm-nano);
+      background: transparent;
+      border-radius: 10px;
+      box-shadow: none;
+      flex: 0 0 auto;
+    }
+
+    .community-qr img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      border: 0;
+    }
+
+    .community-qr-text {
+      font-size: 13px;
+      line-height: 16px;
+      line-height: var(--di-sm-size);
+      font-weight: 700;
+      color: #243b35;
+    }
+
+    .green-arrow {
+      position: absolute;
+      width: 100px;
+      height: 56px;
+      background: linear-gradient(135deg, #b8ff36 0%, #4ed21e 46%, #0d902e 100%);
+      clip-path: polygon(0 36%, 58% 36%, 58% 0, 100% 50%, 58% 100%, 58% 64%, 0 64%);
+      border-radius: 24px;
+      filter: drop-shadow(0 10px 10px rgba(38, 129, 24, 0.26));
+      z-index: 4;
+    }
+
+    .green-arrow.top {
+      display: none;
+      top: 178px;
+      right: 86px;
+      transform: rotate(-24deg);
+    }
+
+    .green-arrow.bottom {
+      right: 260px;
+      bottom: 282px;
+      transform: rotate(-18deg) scale(0.9);
+    }
+
+    .plus {
+      position: absolute;
+      z-index: 1;
+      font-size: 72px;
+      line-height: 1;
+      font-weight: 900;
+      color: rgba(26, 74, 60, 0.24);
+      transform: rotate(16deg);
+    }
+
+    .plus.one {
+      left: 210px;
+      bottom: 288px;
+    }
+
+    .plus.two {
+      left: 118px;
+      bottom: 192px;
+    }
+
+    .monitor-area {
+      position: relative;
+      z-index: 0;
+      width: 100%;
+      height: 264px;
+      margin: -26px 0 12px;
+      pointer-events: none;
+    }
+
+    .monitor-outline {
+      position: absolute;
+      top: -166px;
+      right: -28px;
+      display: block;
+      width: 470px;
+      height: auto;
+      overflow: visible;
+      color: #21a038;
+      opacity: 0.92;
+    }
+
+    .footer {
+      position: absolute;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      z-index: 7;
+      background: rgba(249, 251, 253, 0.78);
+      padding: 16px 24px;
+      padding: var(--di-sm-open) var(--di-body-1-open);
+      text-align: center;
+      font-size: 11px;
+      line-height: 16px;
+      line-height: var(--di-sm-size);
+      color: #7f8c8d;
+    }
+
+    @media (max-width: 620px) {
+      :root {
+        --di-h1-size: 44px;
+      }
+
+      body { padding: 12px; padding: var(--di-sm-inner); }
+      .page { min-height: auto; }
+      .content { padding: 32px 24px 220px; padding: var(--di-h1-nano) var(--di-body-1-open) 220px; }
+      .logo-badge {
+        left: 24px;
+        bottom: 72px;
+        width: calc((100% - 64px) / 2);
+        height: 96px;
+      }
+      .logo-badge svg { width: 190px; }
+      .title { font-size: 44px; letter-spacing: -1.5px; }
+      .lead { font-size: 18px; }
+      .monitor-area {
+        width: 100%;
+        height: 242px;
+        margin: -22px 0 12px;
+        transform: none;
+      }
+
+      .monitor-outline {
+        top: -152px;
+        right: -32px;
+        width: 420px;
+      }
+      .green-arrow.top { top: 148px; right: 34px; }
+    }
+  
+    .community-under-monitor {
+      position: absolute;
+      right: 48px;
+      bottom: 72px;
+      width: calc((100% - 112px) / 2);
+      height: 104px;
+      z-index: 6;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      gap: var(--di-sm-open);
+      background: rgba(255, 255, 255, 0.72);
+      border-radius: 18px;
+      padding: 12px 16px;
+      padding: var(--di-sm-inner) var(--di-sm-open);
+      box-shadow: 0 8px 20px rgba(25, 96, 57, 0.10);
+      backdrop-filter: blur(4px);
+    }
+
+    .community-under-monitor .community-qr {
+      width: 76px;
+      height: 76px;
+      padding: 4px;
+      padding: var(--di-sm-nano);
+      background: transparent;
+      border-radius: 10px;
+      box-shadow: none;
+      flex: 0 0 auto;
+    }
+
+    .community-under-monitor .community-qr img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      border: 0;
+    }
+
+    .community-under-monitor .community-qr-text {
+      font-family: "SB Sans Display", "SB Sans", "SB Sans Text", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+      font-size: 12px;
+      line-height: 16px;
+      line-height: var(--di-sm-size);
+      font-weight: 700;
+      color: #303f49;
+    }
+
+    .community-title {
+      display: block;
+      color: #303f49;
+      font-family: "SB Sans Display", "SB Sans", "SB Sans Text", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+      font-size: 22px;
+      line-height: 24px;
+      font-weight: 850;
+    }
+
+    .community-under-monitor .community-link {
+      margin-top: 8px;
+      margin-top: var(--di-sm-micro);
+      padding: 4px 12px;
+      padding: var(--di-sm-nano) var(--di-sm-inner);
+      font-size: 12px;
+    }
+
+    @media (max-width: 620px) {
+      .community-under-monitor {
+        right: 24px;
+        bottom: 72px;
+        width: calc((100% - 64px) / 2);
+        height: 96px;
+      }
+
+      .community-under-monitor .community-qr {
+        width: 58px;
+        height: 58px;
+      }
+
+      .community-under-monitor .community-qr-text {
+        font-size: 11px;
+      }
+
+      .community-title {
+        font-size: 15px;
+        line-height: 16px;
+      }
+
+      .community-under-monitor .community-link {
+        font-size: 11px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      :root {
+        --di-h1-size: 42px;
+        --di-body-1-size: 22px;
+      }
+
+      body {
+        padding: 0;
+      }
+
+      .page {
+        width: 100%;
+        max-width: 440px;
+        min-height: 956px;
+        min-height: 100vh;
+        box-shadow: none;
+      }
+
+      .content {
+        padding: 36px 20px 220px;
+      }
+
+      .title {
+        max-width: 400px;
+        font-size: 42px;
+        line-height: 42px;
+        margin-bottom: 10px;
+      }
+
+      .lead {
+        max-width: 400px;
+        font-size: 17px;
+        line-height: 22px;
+      }
+
+      .notice {
+        max-width: none;
+        padding: 12px 14px;
+        font-size: 12px;
+        line-height: 16px;
+        border-radius: 16px;
+      }
+
+      .monitor-area {
+        width: 100%;
+        height: 226px;
+        margin: -18px 0 12px;
+        transform: none;
+      }
+
+      .monitor-outline {
+        top: -136px;
+        right: -38px;
+        width: 390px;
+      }
+
+      .green-arrow.top {
+        display: none;
+      }
+
+      .green-arrow.bottom {
+        display: none;
+      }
+
+      .plus {
+        display: none;
+      }
+
+      .plus.one {
+        left: 178px;
+        bottom: 360px;
+      }
+
+      .plus.two {
+        left: 72px;
+        bottom: 274px;
+      }
+
+      .logo-badge,
+      .community-under-monitor {
+        bottom: 76px;
+        width: calc((100% - 56px) / 2);
+        height: 94px;
+        padding: 10px 12px;
+        border-radius: 16px;
+      }
+
+      .logo-badge {
+        left: 20px;
+      }
+
+      .logo-badge svg {
+        width: 156px;
+      }
+
+      .community-under-monitor {
+        right: 20px;
+        gap: 8px;
+      }
+
+      .community-under-monitor .community-qr {
+        width: 54px;
+        height: 54px;
+      }
+
+      .community-under-monitor .community-qr-text {
+        font-size: 11px;
+        line-height: 14px;
+      }
+
+      .community-title {
+        font-size: 14px;
+        line-height: 16px;
+      }
+
+      .community-under-monitor .community-link {
+        margin-top: 6px;
+        padding: 3px 9px;
+        font-size: 11px;
+        line-height: 14px;
+      }
+
+      .footer {
+        right: 0;
+        bottom: 0;
+        left: 0;
+        padding: 10px 18px;
+        font-size: 10px;
+        line-height: 14px;
+      }
+    }
+
+    @media (max-width: 420px) {
+      .logo-badge,
+      .community-under-monitor {
+        height: 84px;
+        padding: 8px;
+        padding: var(--di-sm-micro);
+      }
+
+      .logo-badge svg {
+        width: 120px;
+      }
+
+      .community-under-monitor {
+        gap: 8px;
+        gap: var(--di-sm-micro);
+      }
+
+      .community-under-monitor .community-qr {
+        width: 44px;
+        height: 44px;
+      }
+
+      .community-under-monitor .community-qr-text,
+      .community-under-monitor .community-link {
+        font-size: 10px;
+        line-height: 14px;
+      }
+
+      .community-title {
+        font-size: 12px;
+        line-height: 14px;
+      }
+
+      .community-under-monitor .community-link {
+        padding: 2px 8px;
+      }
+    }
+
   </style>
 </head>
 
-<body style="margin:0; padding:0; background-color:#eef2f5;">
-  <!-- Прехедер (скрытый превью-текст в списке писем) -->
-  <div style="display:none; max-height:0; overflow:hidden; mso-hide:all; font-size:1px; line-height:1px; color:#eef2f5;">
-    Ваш рабочий монитор заменят на новый — инженер свяжется с вами в ближайшие 5 дней.
+<body>
+  <div class="page">
+    <div class="content">
+      <div class="logo-badge">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="550 390 830 305" aria-label="IT Support">
+    <defs>
+      <linearGradient id="itSupportLogoGradient" x1="798.68" y1="425.26" x2="572.34" y2="651.6" gradientUnits="userSpaceOnUse">
+        <stop offset=".03" stop-color="#03ecca"/>
+        <stop offset="1" stop-color="#0388cd"/>
+      </linearGradient>
+      <g id="logoItSupportArt">
+          <path fill="url(#itSupportLogoGradient)" d="M802.7,462.58l-111.75-64.52c-4.99-2.88-11.14-2.88-16.13,0l-111.75,64.52c-4.99,2.88-8.07,8.21-8.07,13.97v129.03c0,5.76,3.07,11.09,8.07,13.97l79.84,46.1v-27.68l-59.94-34.61c-2.48-1.43-4-4.07-4-6.93v-39.13c0-2.21,1.8-4.01,4.01-4.01h7.98c2.21,0,4.01,1.8,4.01,4.01v34.51l59.94,34.61c2.48,1.43,4,4.07,4,6.93v41.53l15.9,9.18s.04,.02,.07,.04v-64.59l-59.94-34.61c-2.48-1.43-4-4.07-4-6.93v-32.3l-27.97-16.15c-2.48-1.43-4-4.07-4-6.93v-40.91c0-2.21,1.8-4.01,4.01-4.01h7.98c2.21,0,4.01,1.8,4.01,4.01v36.29l15.97,9.22v-63.97c0-2.21,1.8-4.01,4.01-4.01h7.98c2.21,0,4.01,1.8,4.01,4.01v27.05l15.97-9.22v-36.29c0-2.21,1.8-4.01,4.01-4.01h7.98c2.21,0,4.01,1.8,4.01,4.01v40.9c0,2.86-1.53,5.5-4,6.93l-27.97,16.14v64.6l47.94,27.68v-18.44l-27.97-16.15c-2.48-1.43-4-4.07-4-6.93v-40.91c0-2.21,1.8-4.01,4.01-4.01h7.98c2.21,0,4.01,1.8,4.01,4.01v36.29l15.97,9.22v-137.79c0-2.21,1.8-4.01,4.01-4.01h7.98c2.21,0,4.01,1.8,4.01,4.01v257.77s.04-.02,.07-.03l15.9-9.18v-33.53h0v-85.82c0-2.21,1.8-4.01,4.01-4.01h7.98c2.21,0,4.01,1.8,4.01,4.01v63.96l15.97-9.22v-64.6l-27.96-16.15c-2.48-1.43-4-4.07-4-6.93v-77.82c0-2.21,1.8-4.01,4.01-4.01h7.98c2.21,0,4.01,1.8,4.01,4.01v73.2l27.96,16.15c2.48,1.43,4,4.07,4,6.93v59.98l15.98-9.22v-64.6l-27.97-16.14c-2.48-1.43-4-4.07-4-6.93v-40.91c0-2.21,1.8-4.01,4.01-4.01h7.98c2.21,0,4.01,1.8,4.01,4.01v36.29l15.97,9.22v-27.05c0-2.21,1.8-4.01,4.01-4.01h7.98c2.21,0,4.01,1.8,4.01,4.01v114.73c0,2.86-1.52,5.5-4,6.93l-59.94,34.61v27.68l79.85-46.1c4.99-2.88,8.07-8.21,8.07-13.97v-129.03c0-5.76-3.07-11.09-8.07-13.97Z"/>
+          <g fill="#303f49">
+            <path d="M882.67,453.99c-1.06-.36-2.18-.49-3.29-.39-5.34,0-8.81,3.14-8.86,8.09,0,2.32,.92,4.54,2.56,6.18,1.64,1.64,3.86,2.56,6.18,2.56s4.54-.92,6.18-2.56c1.64-1.64,2.56-3.86,2.56-6.18,.04-1.12-.16-2.23-.59-3.26-.43-1.03-1.07-1.96-1.88-2.73-.81-.77-1.78-1.35-2.84-1.71Z"/>
+            <path d="M887.26,480.24h-15.85v52.41h15.85v-52.41Z"/>
+            <path d="M920.23,480.24h18.47v13.88h-18.47v18.57c0,5.89,1.77,7.34,6.51,7.34,4.18-.04,8.27-1.19,11.86-3.34v13.48c-2.32,1.87-9.66,3.57-15.75,3.57-11.56,0-18.47-4.52-18.47-16.4v-23.29h-8.31v-13.8h8.26v-9.56l15.85-11.43,.05,20.99Z"/>
+            <path d="M996.87,492.87h.2c3.35-.09,6.66,.71,9.61,2.3s5.43,3.93,7.19,6.78v-18.27c-5.03-3.15-10.86-4.79-16.8-4.72-15.12,0-23.21,6.61-23.21,16.8,0,11.96,10.63,14.85,18.31,16.94,4.34,1.18,7.74,2.11,7.74,4.27,0,1.67-1.37,2.92-5.47,3.14-10.61,.42-17.32-3.47-20.37-7.76v15.22c2.52,2.62,11.23,6.39,20.37,6.39,13.43,0,21.21-6.14,21.21-17.47,0-12.5-11.08-15.12-18.75-16.93-4.07-.96-7.18-1.7-7.18-3.56,0-2.1,1.87-3.14,7.14-3.14Z"/>
+            <path d="M1040.98,511.34c0,5.79,2.5,8.61,8.29,8.61,6.94,0,10.81-2.5,10.71-9.66v-30.05h15.85v52.41h-14.8v-9.98c-1.59,3.51-4.2,6.47-7.5,8.47-3.3,2-7.12,2.97-10.97,2.76-10.51-.12-17.47-6.19-17.47-17.97v-35.69h15.87l.02,31.1Z"/>
+            <path fill-rule="evenodd" d="M1103.82,480.24h-14.8v74.13h15.67v-29.08c1.48,2.76,3.73,5.04,6.46,6.57,2.74,1.53,5.86,2.24,8.99,2.04,13.75,0,23.61-7.89,23.61-28.55,0-18.37-9.76-26.06-22.46-26.06-10.73,0-15.77,5.99-17.47,11.56v-10.61Zm12.3,39.76c-7.26,0-11.36-4.09-11.36-12.3v-3.34c.32-7.04,3.57-11.23,11.88-11.23,6.81,0,11.33,3.57,11.33,12.7,0,10.28-3.57,14.18-11.86,14.18Z"/>
+            <path fill-rule="evenodd" d="M1153.64,480.24h14.8v10.61c1.67-5.57,6.71-11.56,17.47-11.56,12.7,0,22.59,7.69,22.59,26.06,0,20.67-9.98,28.55-23.64,28.55-3.13,.19-6.24-.52-8.98-2.05-2.73-1.53-4.97-3.8-6.45-6.56v29.08h-15.75l-.05-74.13Zm15.75,27.45c0,8.21,4.09,12.3,11.33,12.3,8.29,0,11.86-3.89,11.86-14.18,0-9.13-4.49-12.7-11.33-12.7-8.29,0-11.56,4.19-11.86,11.23v3.34Z"/>
+            <path fill-rule="evenodd" d="M1242.9,534.07c17.85-.15,28.85-9.28,28.85-27.45s-11.76-27.6-27.93-27.6c-17.95,.15-28.88,9.08-28.88,27.45s11.78,27.6,27.95,27.6Zm.52-13.9c-7.19,0-12.18-3.99-12.18-13.55v-.3c0-9.46,4.39-13.45,12.05-13.45,7.19,0,12.18,4.09,12.18,13.55v.3c0,9.46-4.39,13.45-12.05,13.45Z"/>
+            <path d="M1297.48,502.7v30.15h-15.75v-52.61h14.8v10.18c.6-3.04,2.19-5.8,4.53-7.84,2.34-2.03,5.3-3.23,8.4-3.39h.3c1.85-.04,3.67,.44,5.27,1.37v16.47c-2.7-2.55-6.27-3.98-9.98-3.99h-.2c-5.04,.02-7.56,2.17-7.36,9.66Z"/>
+            <path d="M1364.99,480.24h-18.47v-20.99l-15.87,11.43v9.56h-8.29v13.8h8.29v23.29c0,11.88,6.94,16.4,18.49,16.4,6.09,0,13.43-1.7,15.75-3.57v-13.48c-3.59,2.16-7.69,3.31-11.88,3.34-4.72,0-6.49-1.45-6.49-7.34v-18.57h18.47v-13.88Z"/>
+            <path fill-rule="evenodd" d="M868.59,601.69l1.77-4.99h-4.59l1.32-3.84h4.59l2.5-6.71h4.14l-2.37,6.71h5.17l2.35-6.71h4.14l-2.35,6.71h3.87l-1.35,3.84h-3.87l-1.75,4.99h4.59l-1.35,3.89h-4.64l-2.5,6.96h-4.14l2.5-6.96h-5.14l-2.5,6.96h-4.14l2.5-6.96h-3.84l1.35-3.89h3.74Zm4.14,0h5.17l1.75-4.99h-5.14l-1.77,4.99Z"/>
+            <path d="M896.65,593c0-1.77,1.52-2.94,5.19-2.94,1.68,0,3.35,.41,4.84,1.2,1.49,.79,2.77,1.93,3.72,3.32v-6.44c-2.55-1.62-5.52-2.45-8.54-2.37-6.29,0-9.98,2.75-9.98,7.36,0,6.06,5.02,7.24,9.25,8.24,3.07,.72,5.72,1.35,5.72,3.67,0,2.12-1.72,3.39-5.39,3.39-1.87,.1-3.74-.29-5.41-1.12-1.68-.83-3.11-2.08-4.17-3.63v5.74c2.64,2.29,6.06,3.47,9.56,3.29,7.01,0,10.18-3.52,10.18-7.91,0-5.89-5.01-7.1-9.23-8.13-3.08-.75-5.74-1.39-5.74-3.68Z"/>
+            <path fill-rule="evenodd" d="M917.14,612.19v-26.13h11.33c5.84,0,8.81,2.17,8.81,6.49,.12,1.29-.19,2.59-.9,3.68-.7,1.09-1.75,1.91-2.97,2.34,.7,.08,1.39,.29,2,.64,.62,.34,1.16,.81,1.59,1.37,.44,.56,.75,1.2,.94,1.88,.18,.68,.23,1.4,.13,2.1,0,5.42-3.89,7.64-10.23,7.64h-10.71Zm10.68-14.98c2.95,0,4.79-1.3,4.79-3.54s-1.37-3.19-4.69-3.19h-6.11v6.74h6.01Zm.32,10.81c3.59,0,5.22-1.17,5.22-3.67s-1.85-3.47-5.14-3.47h-6.41v7.14h6.34Z"/>
+            <path d="M948.01,600.86h12.03v-4.29h-12.03v-6.21h13.3v-4.29h-18.05v26.13h18.47v-4.29h-13.73v-7.04Z"/>
+            <path fill-rule="evenodd" d="M977.94,603.93c-.76,.08-1.53,.12-2.3,.12h-3.59v8.14h-4.67v-26.13h8.26c8.24,0,11.76,2.95,11.76,8.84,.12,1.69-.3,3.37-1.19,4.81-.9,1.44-2.23,2.55-3.8,3.18l6.69,9.31h-5.59l-5.57-8.26Zm-5.89-13.58v9.41h3.92c4.34,0,6.56-1.42,6.56-4.99s-1.92-4.44-6.49-4.44l-3.99,.02Z"/>
+            <path d="M1002.85,590.36h8.81v-4.29h-22.14v4.29h8.66v21.84h4.67v-21.84Z"/>
+            <path d="M1032.35,600.86h-12.03v7.04h13.8v4.29h-18.47v-26.13h18.07v4.29h-13.41v6.21h12.03v4.29Z"/>
+            <path fill-rule="evenodd" d="M1058.58,612.19h4.99l-10.81-26.13h-5.29l-10.61,26.13h4.74l2.5-6.21h11.98l2.5,6.21Zm-8.49-21.21l4.29,10.71h-8.59l4.29-10.71Z"/>
+            <path d="M1091.25,592.55l-8.41,13.88h-2.35l-8.59-13.7v19.47h-4.67v-26.13h5.92l8.66,14.2,8.56-14.2h5.54v26.13h-4.67v-19.64Z"/>
+          </g>
+        </g>
+      </defs>
+      <use href="#logoItSupportArt"></use>
+        </svg>
+      </div>
+
+      <h1 class="title">%FIO%,<br>пора поменять ваш монитор на новый!</h1>
+
+      <div class="monitor-area">
+        <svg class="monitor-outline" viewBox="0 0 520 360" role="img" aria-label="Новый монитор">
+          <g fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="55" y="42" width="410" height="238" rx="2"></rect>
+            <rect x="64" y="52" width="392" height="216" rx="1"></rect>
+            <path d="M244 280v38"></path>
+            <path d="M276 280v38"></path>
+            <path d="M244 318l-150 31"></path>
+            <path d="M276 318l150 31"></path>
+            <path d="M94 349l166-20 166 20"></path>
+          </g>
+        </svg>
+      </div>
+
+      <p class="lead">
+        Постоянно переключаетесь между окнами из-за маленького экрана?
+        Теряете концентрацию? Если ваш рабочий монитор меньше 24 дюймов —
+        его можно заменить на современный!
+      </p>
+
+      <div class="notice">
+        Монитор, подключенный к вашему компьютеру с именем <strong>%NAME%</strong> по адресу: <strong>%ADDRESS%</strong>, будет заменен на новый!<br>
+        В ближайшее время с Вами свяжется инженер для согласования удобной даты и времени замены в горизонте следующих 5 дней.<br>
+        Время подключения — всего <strong>10 минут</strong>.
+      </div>
+
+    </div>
+
+    <div class="green-arrow top"></div>
+    <div class="green-arrow bottom"></div>
+    <div class="plus one">+</div>
+    <div class="plus two">+</div>
+
+    <div class="community-under-monitor">
+      <div class="community-qr">
+        <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAPYAAAD2CAYAAADlEnrIAAAFdklEQVR42u3dwZHUQAwF0D/UJkQGnAmYMxkQkolgDq5qrSTPe2cYPPb86i5ZqF/XdQV4lh9uAQg2INiAYAOCDQg2CDYg2IBgA4INCDZ8uq+7f+Hnr98rmsv//f3zunP97/589X04dZ2nvtfd71t9305d/1N/z1ZssBUHBBsQbECwgRRXxdNUvUxxVbOryp1hVf13n9P1fLOkCj3t92zFBltxQLABwQYEG0hxVTxN1eYM6y2v7tnucup73b1vT+0tr75OKzbYigOCDQg2INhAmqriWT5ZJcN6xU9V46vvQ5omqDz1rYQVGxBsEGxAsAHBBqIqnu/oeT7Vw/zU+5Ditwaq3FZsQLBBsAHBBgQbyKqq+LTqZdf1VJ96WX09W07V7Jq0Y8UGBBsQbECwQbCBfFhVfEvvdNd87GnXM+3PV/e0V1f1rdiAYAOCDQg2CDawxOu6LncheyaKZMlpoVtOpbRiA4INCDYg2IBgQ1TF8x29zdN6caurxF33oav6Pa2a3fV9u94OWLHBVhwQbECwAcEGUlwVz7Ae4GnV2q7rqe45n2bL/Pbq34MVG2zFAcEGBBsQbCDDJqhMq9bqkZ75HKdV6be8zbFig604INiAYAOCDeTQaZvVVdauUy/zYZM6pvWud50u+tTTZq3YYCsOCDYg2IBgAzlUFa+uQndNrjjV8zytp/ru9dz9/O3z5Ke95Tl1f6zYYCsOCDYg2IBgAxk2QSVLJnJMq/qeeivR1bvedT+nTYyxYgOCDQg2CDYg2ECWn7ZZXa3d0mvdNTd72tz1rt/Pll7u6uu0YoOtOCDYgGADgg2kuCqeYacZdvU2T5vg0dXzPO3zt5z+eeq5W7HBVhwQbECwAcEGMmyCyvaqY9dpm9t7uac93+q3El1vPazYYCsOCDYg2IBgAymuim/pIc9De+C7dE2emTZnftq8cSs22IoDgg0INiDYQJbMFZ+ma+LKls/fcrrop03ysWKDrTgg2IBgA4INvPGVJT3GWVL13XK6ZfV9O1XN/rTJOVZsQLBBsAHBBgQbyJKq+Jbe42mnN06rBp/6d6dVibf8nwWnbQKCDYINCDYg2ECW94p3zYWedorltPnb06rW1c9r+0QUKzYg2CDYgGADgg2kqSreVbWeVnWsrvZXV92nVemn2X46pxUbbMUBwQYEGxBsIIeq4tOq0NVVx+rqZVfv97Sqfpb0om/pybdig604INiAYAOCDaRprniGzcHu6qme1pP/1Gp5dRW66xRUveKAYINgA4INCDaQYVXx6uro9jnbXdXju99r2nPsmjzz7vOnzTm3YoOtOCDYgGADgg3c9LquKxt6oatNO2Wy+v533YenTsKZ9lys2GArDgg2INiAYANp6hVP0wSJrlM7p1VHq3vgu+Zmd73F2DJH3YoNtuKAYAOCDQg2kOKqeJZUfasngUyr7m7pne56jtur31ZssBUHBBsQbECwgRRPUNmuq5f7qaeRTjs9c1pvfNf9t2KDrTgg2IBgA4IN5FCv+JYe2rvVxVNV1mn3p+s00i2nUk47ZfXU9VixwVYcEGxAsAHBBjJsrnicPrmqSt81kWZa7/2WU1+t2GArDgg2INiAYANpmiv+1Oqludwzn8tT54RbsQHBBsEGBBsQbCAPPW0zS+ZXp7hKvGVCS1d1/anz1U1QAQQbBBsQbECwgaiKp3NCRddpj9Mmk9yd+32q1/3U8+06bbPrrYcVG2zFAcEGBBsQbCBNVfHtEzamVX275pN3Vd23TD6Zdp1WbLAVBwQbEGxAsIEUV8WfWr2c1vud5aeCbuntn/aWwYoNCDYINiDYgGADh7yu63IXwIoNCDYg2IBgA4INgg0INiDYgGADgg2CDTzLf0h20d1cZf6pAAAAAElFTkSuQmCC" alt="QR-код сообщества Техрефреш">
+      </div>
+      <div class="community-qr-text">
+        <span class="community-title">Сообщество Техрефреш</span>
+        <a class="community-link" href="https://sberfriend.sberbank.ru/sberfriend/#/media/community/17208944/publications" target="_blank" rel="noopener">
+          Перейти
+        </a>
+      </div>
+    </div>
+
+    <div class="footer">
+      Это сервисное уведомление, автоматическая рассылка. Пожалуйста, не отвечайте на него.
+    </div>
   </div>
-
-  <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" bgcolor="#eef2f5" style="background-color:#eef2f5;">
-    <tr>
-      <td align="center" style="padding:24px 12px;">
-
-        <!-- КОНТЕЙНЕР 600px -->
-        <table role="presentation" class="container" width="600" cellpadding="0" cellspacing="0" border="0" style="width:600px; max-width:600px; background-color:#ffffff; border-radius:18px; overflow:hidden;">
-
-          <!-- ШАПКА с логотипом (текстовый локап, без картинок) -->
-          <tr>
-            <td bgcolor="#21a038" style="background-color:#21a038; padding:26px 40px;">
-              <table role="presentation" cellpadding="0" cellspacing="0" border="0">
-                <tr>
-                  <td style="font-family:Arial,Helvetica,sans-serif; color:#ffffff; font-size:22px; font-weight:bold; letter-spacing:-0.5px; line-height:1.1;">
-                    it&nbsp;support
-                  </td>
-                </tr>
-                <tr>
-                  <td style="font-family:Arial,Helvetica,sans-serif; color:#d9f5e1; font-size:13px; font-weight:bold; letter-spacing:1px; line-height:1.4; padding-top:2px;">
-                    #SBERTEAM
-                  </td>
-                </tr>
-              </table>
-            </td>
-          </tr>
-
-          <!-- ЗАГОЛОВОК + ТЕКСТ -->
-          <tr>
-            <td class="px" style="padding:40px 40px 8px 40px;">
-              <h1 class="h1" style="margin:0 0 18px 0; font-family:Arial,Helvetica,sans-serif; font-size:40px; line-height:44px; font-weight:800; letter-spacing:-1px; color:#0b1f15;">
-                Пора поменять ваш монитор на новый!
-              </h1>
-              <p class="lead" style="margin:0; font-family:Arial,Helvetica,sans-serif; font-size:18px; line-height:26px; color:#2b3a33;">
-                Постоянно переключаетесь между окнами из-за маленького экрана?
-                Теряете концентрацию? Если ваш рабочий монитор меньше 24&nbsp;дюймов —
-                его можно заменить на современный!
-              </p>
-            </td>
-          </tr>
-
-          <!-- ИЛЛЮСТРАЦИЯ МОНИТОРА из табличных блоков (рендерится даже в Outlook) -->
-          <tr>
-            <td align="center" style="padding:26px 40px 6px 40px;">
-              <table role="presentation" class="monitor" width="300" cellpadding="0" cellspacing="0" border="0" style="width:300px;">
-                <!-- корпус -->
-                <tr>
-                  <td bgcolor="#1f9b39" style="background-color:#1f9b39; padding:14px; border-radius:16px;">
-                    <!-- экран -->
-                    <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0">
-                      <tr>
-                        <td class="screen-cell" bgcolor="#0f4d3c" height="150" style="background-color:#0f4d3c; height:150px; border-radius:8px;">
-                          <!-- декоративные «окна» интерфейса -->
-                          <table role="presentation" cellpadding="0" cellspacing="0" border="0" align="center" style="margin:0 auto;">
-                            <tr>
-                              <td height="150" valign="middle" align="center" style="height:150px;">
-                                <table role="presentation" cellpadding="0" cellspacing="0" border="0">
-                                  <tr>
-                                    <td width="46" height="46" bgcolor="#7ee33d" style="background-color:#7ee33d; border-radius:8px;">&nbsp;</td>
-                                    <td width="12">&nbsp;</td>
-                                    <td width="46" height="46" bgcolor="#39c7c2" style="background-color:#39c7c2; border-radius:8px;">&nbsp;</td>
-                                    <td width="12">&nbsp;</td>
-                                    <td width="46" height="46" bgcolor="#bdff6b" style="background-color:#bdff6b; border-radius:8px;">&nbsp;</td>
-                                  </tr>
-                                </table>
-                              </td>
-                            </tr>
-                          </table>
-                        </td>
-                      </tr>
-                    </table>
-                  </td>
-                </tr>
-                <!-- ножка -->
-                <tr>
-                  <td align="center" style="padding-top:0;">
-                    <table role="presentation" cellpadding="0" cellspacing="0" border="0">
-                      <tr><td width="46" height="22" bgcolor="#1f9b39" style="background-color:#1f9b39;">&nbsp;</td></tr>
-                    </table>
-                  </td>
-                </tr>
-                <!-- подставка -->
-                <tr>
-                  <td align="center">
-                    <table role="presentation" cellpadding="0" cellspacing="0" border="0">
-                      <tr><td width="150" height="12" bgcolor="#0f7a2e" style="background-color:#0f7a2e; border-radius:8px;">&nbsp;</td></tr>
-                    </table>
-                  </td>
-                </tr>
-              </table>
-            </td>
-          </tr>
-
-          <!-- ПЛАШКА-УВЕДОМЛЕНИЕ -->
-          <tr>
-            <td class="px" style="padding:18px 40px 8px 40px;">
-              <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" bgcolor="#eaf6ec" style="background-color:#eaf6ec; border-radius:14px;">
-                <tr>
-                  <td style="padding:18px 20px; font-family:Arial,Helvetica,sans-serif; font-size:15px; line-height:22px; color:#243b35;">
-                    Монитор, подключенный к вашему компьютеру с именем
-                    <strong style="color:#0a6f35;">%NAME%</strong>
-                    по адресу <strong style="color:#0a6f35;">%ADDRESS%</strong>, будет заменён на новый.<br><br>
-                    В ближайшее время с вами свяжется инженер для согласования удобной даты и времени замены
-                    в&nbsp;горизонте следующих <strong>5&nbsp;дней</strong>. Время подключения — всего
-                    <strong>10&nbsp;минут</strong>.
-                  </td>
-                </tr>
-              </table>
-            </td>
-          </tr>
-
-          <!-- КНОПКА «Сообщество Техрефреш» (bulletproof, с VML-фолбэком для Outlook) -->
-          <tr>
-            <td class="px" align="center" style="padding:22px 40px 8px 40px;">
-              <table role="presentation" cellpadding="0" cellspacing="0" border="0">
-                <tr>
-                  <td align="center" bgcolor="#21a038" style="border-radius:999px;">
-                    <!--[if mso]>
-                    <v:roundrect xmlns:v="urn:schemas-microsoft-com:vml" xmlns:w="urn:schemas-microsoft-com:office:word" href="https://sberfriend.sberbank.ru/sberfriend/#/media/community/17208944/publications" style="height:48px;v-text-anchor:middle;width:300px;" arcsize="50%" strokecolor="#21a038" fillcolor="#21a038">
-                    <w:anchorlock/>
-                    <center style="color:#ffffff;font-family:Arial,sans-serif;font-size:16px;font-weight:bold;">Перейти в сообщество Техрефреш</center>
-                    </v:roundrect>
-                    <![endif]-->
-                    <!--[if !mso]><!-- -->
-                    <a href="https://sberfriend.sberbank.ru/sberfriend/#/media/community/17208944/publications" target="_blank" style="display:inline-block; padding:14px 30px; font-family:Arial,Helvetica,sans-serif; font-size:16px; font-weight:bold; color:#ffffff; background-color:#21a038; border-radius:999px;">
-                      Перейти в сообщество Техрефреш
-                    </a>
-                    <!--<![endif]-->
-                  </td>
-                </tr>
-              </table>
-            </td>
-          </tr>
-          <tr>
-            <td align="center" style="padding:4px 40px 36px 40px; font-family:Arial,Helvetica,sans-serif; font-size:12px; line-height:18px; color:#7f8c8d;">
-              Новости и ответы на вопросы — в сообществе Техрефреш на СберДруг.
-            </td>
-          </tr>
-
-          <!-- ФУТЕР -->
-          <tr>
-            <td bgcolor="#f4f7f9" style="background-color:#f4f7f9; padding:16px 40px; font-family:Arial,Helvetica,sans-serif; font-size:11px; line-height:16px; color:#90a0a8; text-align:center;">
-              Это сервисное уведомление, автоматическая рассылка. Пожалуйста, не отвечайте на него.
-            </td>
-          </tr>
-
-        </table>
-        <!-- /КОНТЕЙНЕР -->
-
-      </td>
-    </tr>
-  </table>
 </body>
 </html>
